@@ -1,0 +1,16 @@
+<div class="relative h-[55vh] w-screen overflow-hidden">
+  <%= image_tag 'header.jpg', alt: 'logo', class: 'w-full h-full object-cover' %>
+  <div class="absolute inset-0 bg-black opacity-35"></div>
+  <div class="absolute top-0 left-1/2 transform -translate-x-1/2 mt-4 text-white">
+    <%= link_to 'Home', root_path, class: 'mx-2 antic-didone-regular text-xl' %>
+    <%= link_to 'Rsvps', rsvps_path, class: 'mx-2 antic-didone-regular text-xl' %>
+    <%= link_to 'Gifts', gifts_path, class: 'mx-2 antic-didone-regular text-xl' %>
+  </div>
+
+  <div class="absolute bottom-50 left-1/2 transform -translate-x-1/2 mb-4 text-white">
+    <p class="mb-1 pinyon-script-regular text-center text-xl">03.16.25</p>
+    <h1 class="text-4xl antic-didone-regular text-center font-bold">Eric & Hayley</h1>
+    <p class="mt-1 parisienne-regular text-center text-4xl">Come and celebrate with us!</p>
+  </div>
+</div>
+
