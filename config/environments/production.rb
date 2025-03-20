@@ -89,6 +89,6 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
   #  # Ensure assets are served directly without precompilation
-  # config.assets.debug = true
+  config.assets.debug = true
   config.assets.compile = true
 end
