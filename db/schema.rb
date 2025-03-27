@@ -15,10 +15,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_14_195102) do
   enable_extension "pg_catalog.plpgsql"
 
   create_table "rsvps", force: :cascade do |t|
-    t.string "name"
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "guests"
     t.string "phone_number"
     t.string "email"
     t.boolean "present"
+    t.string "dietary_restrictions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

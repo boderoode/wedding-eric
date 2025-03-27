@@ -23,17 +23,23 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
 
   </head>
 
   <body>
+    
+    
+    <% if current_page?(root_path) %>
     <div class="h-1/2 w-screen">
       <%= render 'shared/header' %>
-    </div>  
-    <%= render 'shared/home' %>
-    <%= render 'shared/footer' %>
+    </div>
+    <% end %>
+
+    
     <%= yield %>
+    <%= render 'shared/footer' %>
   </body>
 </html>

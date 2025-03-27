@@ -1,0 +1,69 @@
+<div class="relative h-screen w-screen overflow-hidden bg-gray-100">
+  <%= image_tag 'header.jpg', alt: 'logo', class: 'w-full h-full object-cover z-0' %>
+  <div class="absolute inset-0 bg-black opacity-10 pointer-events-none z-10"></div>
+  <div class="absolute top-0 left-1/2 transform -translate-x-1/2 mt-4 text-white z-20">
+    <%= link_to 'Home', root_path, class: 'mx-2 antic-didone-regular text-xl' %>
+    <%= link_to 'Rsvps', new_rsvp_path, class: 'mx-2 antic-didone-regular text-xl' %>
+    <%= link_to 'Gifts', gifts_path, class: 'mx-2 antic-didone-regular text-xl' %>
+  </div>
+
+  <div class="absolute inset-4 sm:inset-10 flex items-center justify-center">
+    <div class="bg-[#f7f6ed] p-6 sm:p-10 rounded-xl shadow-2xl w-250 max-w-2xl sm:max-w-xl">
+      <h2 class="text-2xl sm:text-3xl font-serif font-bold mb-6 text-center text-gray-800">RSVP</h2>
+      <%= form_with model: @rsvp, url: rsvps_path, local: true do |form| %>
+        <div class="mb-6 flex flex-col sm:flex-row sm:space-x-6">
+          <div class="w-full sm:w-1/2">
+            <%= form.label :first_name, "First Name", class: "block text-gray-600 font-medium mb-2" %>
+            <%= form.text_field :first_name, class: "w-full px-4 py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b]" %>
+            <% if @rsvp.errors[:first_name].any? %>
+              <div class="text-red-600 text-sm mt-1"><%= @rsvp.errors[:first_name].first %></div>
+            <% end %>
+          </div>
+          <div class="w-full sm:w-1/2 mt-4 sm:mt-0">
+            <%= form.label :last_name, "Last Name", class: "block text-gray-600 font-medium mb-2" %>
+            <%= form.text_field :last_name, class: "w-full px-4 py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b]" %>
+            <% if @rsvp.errors[:last_name].any? %>
+              <div class="text-red-600 text-sm mt-1"><%= @rsvp.errors[:last_name].first %></div>
+            <% end %>
+          </div>
+        </div>
+        <div class="mb-6">
+          <%= form.label :email, "Email Address", class: "block text-gray-600 font-medium mb-2" %>
+          <%= form.email_field :email, class: "w-full px-4 py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b]" %>
+          <% if @rsvp.errors[:email].any? %>
+            <div class="text-red-600 text-sm mt-1"><%= @rsvp.errors[:email].first %></div>
+          <% end %>
+        </div>
+        <div class="mb-6">
+          <%= form.label :phone_number, "Phone Number", class: "block text-gray-600 font-medium mb-2" %>
+          <%= form.text_field :phone_number, class: "w-full px-4 py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b]" %>
+          <% if @rsvp.errors[:phone_number].any? %>
+            <div class="text-red-600 text-sm mt-1"><%= @rsvp.errors[:phone_number].first %></div>
+          <% end %>   
+        </div>
+        <div class="mb-6">
+          <%= form.label :guests, "Number of Guests", class: "block text-gray-600 font-medium mb-2" %>
+          <%= form.number_field :guests, class: "w-full px-4 py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b]" %>
+          <% if @rsvp.errors[:guests].any? %>
+            <div class="text-red-600 text-sm mt-1"><%= @rsvp.errors[:guests].first %></div>
+          <% end %>
+        </div>
+        <div class="mb-6">
+          <%= form.label :dietary_restrictions, "Dietary Restrictions", class: "block text-gray-600 font-medium mb-2" %>
+          <%= form.text_area :dietary_restrictions, class: "w-full px-4 py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b]" %>
+        </div>
+        <div class="mb-6">
+          <%= form.label :present, "Will you attend?", class: "block text-gray-600 font-medium mb-2" %>
+          <%= form.select :present, [["Yes", true], ["No", false]], {}, class: "w-full px-4 py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b]" %>
+          <% if @rsvp.errors[:present].any? %>
+            <div class="text-red-600 text-sm mt-1"><%= @rsvp.errors[:present].first %></div>
+          <% end %>
+        </div>
+        <div class="text-center">
+          <%= form.submit "Submit RSVP", class: "bg-[#6e8a6b] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#50654e] transition duration-300" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
