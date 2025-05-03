@@ -1,14 +1,14 @@
-<div class="relative min-h-screen w-screen overflow-hidden bg-gray-100">
+<div class="relative h-screen w-screen overflow-hidden bg-gray-100">
   <%= image_tag 'header.jpg', alt: 'logo', class: 'w-full h-full object-cover z-0' %>
   <div class="absolute inset-0 bg-black opacity-10 pointer-events-none z-10"></div>
-  <div class="absolute top-0 left-1/2 transform -translate-x-1/2 mt-4 text-white z-20 flex space-x-4">
-    <%= link_to 'Home', root_path, class: 'mx-2 antic-didone-regular text-sm sm:text-lg lg:text-xl' %>
-    <%= link_to 'Rsvps', new_rsvp_path, class: 'mx-2 antic-didone-regular text-sm sm:text-lg lg:text-xl' %>
-    <%= link_to 'Gifts', gifts_path, class: 'mx-2 antic-didone-regular text-sm sm:text-lg lg:text-xl' %>
+  <div class="absolute top-0 left-1/2 transform -translate-x-1/2 mt-4 text-white z-20">
+    <%= link_to 'Home', root_path, class: 'mx-2 antic-didone-regular text-xl' %>
+    <%= link_to 'Rsvps', new_rsvp_path, class: 'mx-2 antic-didone-regular text-xl' %>
+    <%= link_to 'Gifts', gifts_path, class: 'mx-2 antic-didone-regular text-xl' %>
   </div>
 
-  <div class="absolute inset-4 sm:inset-10 flex items-center justify-center mt-32 mb-32">
-    <div class="bg-[#f7f6ed] p-6 sm:p-10 rounded-xl shadow-2xl w-full max-w-md sm:max-w-lg lg:max-w-2xl">
+  <div class="absolute inset-4 sm:inset-10 flex items-center justify-center mt-64 mb-64">
+    <div class="bg-[#f7f6ed] p-6 sm:p-10 rounded-xl shadow-2xl w-250 max-w-2xl sm:max-w-xl">
       <%= form_with model: @rsvp, url: rsvps_path, local: true do |form| %>
         <div class="mb-6 flex flex-col sm:flex-row sm:space-x-6">
           <div class="w-full sm:w-1/2">
