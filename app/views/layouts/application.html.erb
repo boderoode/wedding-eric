@@ -38,6 +38,18 @@
     </div>
     <% end %>
 
+    <% if current_page?(faq_index_path) %>
+    <div class="h-1/2 w-screen">
+      <%= render 'shared/header' %>
+    </div>
+    <% end %>
+
+    <% if current_page?(hotels_path) %>
+    <div class="h-1/2 w-screen">
+      <%= render 'shared/header' %>
+    </div>
+    <% end %>
+
     
     <%= yield %>
     <%= render 'shared/footer' %>
