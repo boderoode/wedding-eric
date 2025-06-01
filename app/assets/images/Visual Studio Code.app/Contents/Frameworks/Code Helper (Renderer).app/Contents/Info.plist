@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>CFBundleIdentifier</key>
+    <string>com.github.Electron.helper</string>
+    <key>CFBundleName</key>
+    <string>Electron Helper (Renderer)</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>DTCompiler</key>
+    <string>com.apple.compilers.llvm.clang.1_0</string>
+    <key>DTSDKBuild</key>
+    <string>24B75</string>
+    <key>DTSDKName</key>
+    <string>macosx15.1</string>
+    <key>DTXcode</key>
+    <string>1610</string>
+    <key>DTXcodeBuild</key>
+    <string>16B40</string>
+    <key>LSEnvironment</key>
+    <dict>
+      <key>MallocNanoZone</key>
+      <string>0</string>
+    </dict>
+    <key>LSUIElement</key>
+    <true/>
+    <key>NSSupportsAutomaticGraphicsSwitching</key>
+    <true/>
+    <key>ElectronAsarIntegrity</key>
+    <dict>
+      <key>Contents/Resources/app/node_modules.asar</key>
+      <dict>
+        <key>algorithm</key>
+        <string>SHA256</string>
+        <key>hash</key>
+        <string>078f672cd7ee004da13dbcd633ca4ffec89e1a82a328edd817f065de49dc6429</string>
+      </dict>
+    </dict>
+  </dict>
+</plist>
