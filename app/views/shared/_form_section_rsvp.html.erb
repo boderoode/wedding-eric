@@ -9,8 +9,8 @@
     <%= link_to 'Gifts', gifts_path, class: 'mx-2 antic-didone-regular text-xl' %>
   </div>
 
-  <div class="relative z-20 flex items-center justify-center min-h-screen py-24 px-12 sm:py-16 sm:px-0">
-    <div class="bg-[#f7f6ed] p-4 sm:p-10 rounded-xl shadow-2xl w-full max-w-md sm:max-w-xl max-h-[90vh] overflow-y-auto mt-8 mb-8">
+  <div class="relative z-10 flex items-center justify-center min-h-screen py-24 px-12 sm:py-12 sm:px-0">
+    <div class="bg-[#f7f6ed] p-4 sm:p-10 rounded-xl shadow-2xl w-full max-w-md sm:max-w-xl max-h-[100vh] overflow-y-auto mt-8 mb-8">
       <%= form_with model: @rsvp, url: rsvps_path, local: true do |form| %>
         <div class="mb-6 flex flex-col sm:flex-row sm:space-x-6">
           <div class="w-full sm:w-1/2">

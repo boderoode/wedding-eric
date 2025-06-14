@@ -50,6 +50,12 @@
     </div>
     <% end %>
 
+    <% if current_page?(gifts_path) %>
+    <div class="h-1/2 w-screen">
+      <%= render 'shared/header' %>
+    </div>
+    <% end %>
+
     
     <%= yield %>
     <%= render 'shared/footer' %>
