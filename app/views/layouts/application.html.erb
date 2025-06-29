@@ -2,7 +2,7 @@
 <html>
   <head>
     <title><%= content_for(:title) || "Wedding" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -32,32 +32,14 @@
   <body>
     
     
-    <% if current_page?(root_path) %>
-    <div class="h-1/2 w-screen">
-      <%= render 'shared/header' %>
-    </div>
+    <% if current_page?(root_path) || current_page?(faq_index_path) || current_page?(hotels_path) || current_page?(gifts_path) %>
+      <div class="w-full">
+        <%= render 'shared/header' %>
+      </div>
     <% end %>
-
-    <% if current_page?(faq_index_path) %>
-    <div class="h-1/2 w-screen">
-      <%= render 'shared/header' %>
-    </div>
-    <% end %>
-
-    <% if current_page?(hotels_path) %>
-    <div class="h-1/2 w-screen">
-      <%= render 'shared/header' %>
-    </div>
-    <% end %>
-
-    <% if current_page?(gifts_path) %>
-    <div class="h-1/2 w-screen">
-      <%= render 'shared/header' %>
-    </div>
-    <% end %>
-
-    
-    <%= yield %>
+    <main class="min-h-screen w-full flex flex-col justify-between">
+      <%= yield %>
+    </main>
     <%= render 'shared/footer' %>
   </body>
 </html>

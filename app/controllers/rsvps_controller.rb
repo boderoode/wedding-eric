@@ -1,3 +1,5 @@
+
+
 class RsvpsController < ApplicationController
   def new
     @rsvp = Rsvp.new
@@ -5,10 +7,15 @@ class RsvpsController < ApplicationController
 
   def create
     @rsvp = Rsvp.new(rsvp_params)
+    full_name = "#{@rsvp.first_name.to_s.strip} #{@rsvp.last_name.to_s.strip}".squeeze(" ").titleize
+    unless InviteeList.list.include?(full_name)
+      @rsvp.errors.add(:base, "The name you entered is not on the invite list. Please check your spelling or contact the couple if you believe this is a mistake.")
+      render :new, status: :unprocessable_entity
+      return
+    end
     if @rsvp.save
       redirect_to root_path, notice: "Thank you for your RSVP!"
     else
-      # Log errors for debugging (optional)
       puts "#{@rsvp.errors.any?} because error is #{@rsvp.errors.full_messages}"
       render :new, status: :unprocessable_entity
     end

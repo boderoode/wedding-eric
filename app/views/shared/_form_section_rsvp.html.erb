@@ -1,67 +1,80 @@
 <div class="relative min-h-screen w-full bg-gray-100 overflow-hidden">
-  <%= image_tag 'header.jpg', alt: 'logo', class: 'absolute inset-0 w-full h-full object-cover z-0' %>
-  <div class="absolute inset-0 bg-black opacity-10 pointer-events-none z-10"></div>
-  <div class="absolute top-0 left-1/2 transform -translate-x-1/2 mt-4 text-white z-20 flex flex-wrap justify-center gap-2">
-    <%= link_to 'Home', root_path, class: 'mx-2 antic-didone-regular text-xl' %>
-    <%= link_to 'Rsvps', new_rsvp_path, class: 'mx-2 antic-didone-regular text-xl' %>
-    <%= link_to 'Faqs', faq_index_path, class: 'mx-2 antic-didone-regular text-xl' %>
-    <%= link_to 'Hotels', hotels_path, class: 'mx-2 antic-didone-regular text-xl' %>
-    <%= link_to 'Gifts', gifts_path, class: 'mx-2 antic-didone-regular text-xl' %>
+  <%= image_tag 'header-foto.jpg', alt: 'logo', class: 'absolute inset-0 w-full h-full object-cover z-0' %>
+  <div class="absolute inset-0 bg-black opacity-35 pointer-events-none z-10"></div>
+  <div class="absolute top-0 left-1/2 transform -translate-x-1/2 mt-2 sm:mt-4 text-white z-20 flex flex-wrap justify-center gap-1 sm:gap-2 px-2 w-full">
+    <%= link_to 'Home', root_path, class: 'mx-1 sm:mx-2 antic-didone-regular text-base sm:text-xl' %>
+    <%= link_to 'Rsvps', new_rsvp_path, class: 'mx-1 sm:mx-2 antic-didone-regular text-base sm:text-xl' %>
+    <%= link_to 'Faqs', faq_index_path, class: 'mx-1 sm:mx-2 antic-didone-regular text-base sm:text-xl' %>
+    <%= link_to 'Hotels', hotels_path, class: 'mx-1 sm:mx-2 antic-didone-regular text-base sm:text-xl' %>
+    <%= link_to 'Gifts', gifts_path, class: 'mx-1 sm:mx-2 antic-didone-regular text-base sm:text-xl' %>
   </div>
 
-  <div class="relative z-10 flex items-center justify-center min-h-screen py-24 px-12 sm:py-12 sm:px-0">
-    <div class="bg-[#f7f6ed] p-4 sm:p-10 rounded-xl shadow-2xl w-full max-w-md sm:max-w-xl max-h-[100vh] overflow-y-auto mt-8 mb-8">
-      <%= form_with model: @rsvp, url: rsvps_path, local: true do |form| %>
-        <div class="mb-6 flex flex-col sm:flex-row sm:space-x-6">
-          <div class="w-full sm:w-1/2">
-            <%= form.label :first_name, "First Name", class: "block text-gray-600 font-medium mb-2" %>
-            <%= form.text_field :first_name, class: "w-full px-4 py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b]" %>
-            <% if @rsvp.errors[:first_name].any? %>
-              <div class="text-red-600 text-sm mt-1"><%= @rsvp.errors[:first_name].first %></div>
-            <% end %>
-          </div>
-          <div class="w-full sm:w-1/2 mt-4 sm:mt-0">
-            <%= form.label :last_name, "Last Name", class: "block text-gray-600 font-medium mb-2" %>
-            <%= form.text_field :last_name, class: "w-full px-4 py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b]" %>
-            <% if @rsvp.errors[:last_name].any? %>
-              <div class="text-red-600 text-sm mt-1"><%= @rsvp.errors[:last_name].first %></div>
+  <div class="relative z-10 flex items-center justify-center min-h-screen py-8 px-2 sm:py-12 sm:px-0">
+    <div class="bg-[#f7f6ed] p-3 sm:p-6 md:p-10 rounded-xl shadow-2xl w-full max-w-[95vw] sm:max-w-md md:max-w-xl max-h-[95vh] overflow-y-auto mt-4 mb-4 sm:mt-8 sm:mb-8">
+      <div class="mb-6 text-center">
+        <span class="block text-base sm:text-lg text-gray-700 font-medium">Please RSVP by <span class="font-bold">September 18th</span>.</span>
+      </div>
+      <% if @rsvp.errors.any? %>
+        <div class="mb-4 sm:mb-6">
+          <div class="bg-red-100 border border-red-300 text-red-800 rounded-lg px-3 py-2 sm:px-4 sm:py-3 flex flex-col items-center shadow-sm w-full">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 mb-1 sm:mb-2 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/></svg>
+            <% @rsvp.errors.full_messages.each do |msg| %>
+              <div class="mb-1 text-sm sm:text-base font-medium text-center"><%= msg %></div>
             <% end %>
           </div>
         </div>
-        <div class="mb-6">
-          <%= form.label :email, "Email Address", class: "block text-gray-600 font-medium mb-2" %>
-          <%= form.email_field :email, class: "w-full px-4 py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b]" %>
+      <% end %>
+      <%= form_with model: @rsvp, url: rsvps_path, local: true do |form| %>
+        <div class="mb-4 flex flex-col sm:flex-row sm:space-x-6">
+          <div class="w-full sm:w-1/2">
+            <%= form.label :first_name, "First Name", class: "block text-gray-600 font-medium mb-1 sm:mb-2 text-sm sm:text-base" %>
+            <%= form.text_field :first_name, class: "w-full px-3 py-2 sm:px-4 sm:py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b] text-base sm:text-lg rounded" %>
+            <% if @rsvp.errors[:first_name].any? %>
+              <div class="text-red-600 text-xs sm:text-sm mt-1"><%= @rsvp.errors[:first_name].first %></div>
+            <% end %>
+          </div>
+          <div class="w-full sm:w-1/2 mt-3 sm:mt-0">
+            <%= form.label :last_name, "Last Name", class: "block text-gray-600 font-medium mb-1 sm:mb-2 text-sm sm:text-base" %>
+            <%= form.text_field :last_name, class: "w-full px-3 py-2 sm:px-4 sm:py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b] text-base sm:text-lg rounded" %>
+            <% if @rsvp.errors[:last_name].any? %>
+              <div class="text-red-600 text-xs sm:text-sm mt-1"><%= @rsvp.errors[:last_name].first %></div>
+            <% end %>
+          </div>
+        </div>
+        <div class="mb-4">
+          <%= form.label :email, "Email Address", class: "block text-gray-600 font-medium mb-1 sm:mb-2 text-sm sm:text-base" %>
+          <%= form.email_field :email, class: "w-full px-3 py-2 sm:px-4 sm:py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b] text-base sm:text-lg rounded" %>
           <% if @rsvp.errors[:email].any? %>
-            <div class="text-red-600 text-sm mt-1"><%= @rsvp.errors[:email].first %></div>
+            <div class="text-red-600 text-xs sm:text-sm mt-1"><%= @rsvp.errors[:email].first %></div>
           <% end %>
         </div>
-        <div class="mb-6">
-          <%= form.label :phone_number, "Phone Number", class: "block text-gray-600 font-medium mb-2" %>
-          <%= form.text_field :phone_number, class: "w-full px-4 py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b]" %>
+        <div class="mb-4">
+          <%= form.label :phone_number, "Phone Number", class: "block text-gray-600 font-medium mb-1 sm:mb-2 text-sm sm:text-base" %>
+          <%= form.text_field :phone_number, class: "w-full px-3 py-2 sm:px-4 sm:py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b] text-base sm:text-lg rounded" %>
           <% if @rsvp.errors[:phone_number].any? %>
-            <div class="text-red-600 text-sm mt-1"><%= @rsvp.errors[:phone_number].first %></div>
+            <div class="text-red-600 text-xs sm:text-sm mt-1"><%= @rsvp.errors[:phone_number].first %></div>
           <% end %>   
         </div>
-        <div class="mb-6">
-          <%= form.label :guests, "Number of Guests", class: "block text-gray-600 font-medium mb-2" %>
-          <%= form.number_field :guests, class: "w-full px-4 py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b]" %>
+        <div class="mb-4">
+          <%= form.label :guests, "Number of Guests", class: "block text-gray-600 font-medium mb-1 sm:mb-2 text-sm sm:text-base" %>
+          <%= form.number_field :guests, class: "w-full px-3 py-2 sm:px-4 sm:py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b] text-base sm:text-lg rounded" %>
           <% if @rsvp.errors[:guests].any? %>
-            <div class="text-red-600 text-sm mt-1"><%= @rsvp.errors[:guests].first %></div>
+            <div class="text-red-600 text-xs sm:text-sm mt-1"><%= @rsvp.errors[:guests].first %></div>
           <% end %>
         </div>
-        <div class="mb-6">
-          <%= form.label :dietary_restrictions, "Dietary Restrictions", class: "block text-gray-600 font-medium mb-2" %>
-          <%= form.text_area :dietary_restrictions, class: "w-full px-4 py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b]" %>
+        <div class="mb-4">
+          <%= form.label :dietary_restrictions, "Dietary Restrictions", class: "block text-gray-600 font-medium mb-1 sm:mb-2 text-sm sm:text-base" %>
+          <%= form.text_area :dietary_restrictions, class: "w-full px-3 py-2 sm:px-4 sm:py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b] text-base sm:text-lg rounded" %>
         </div>
-        <div class="mb-6">
-          <%= form.label :present, "Will you attend?", class: "block text-gray-600 font-medium mb-2" %>
-          <%= form.select :present, [["Yes", true], ["No", false]], {}, class: "w-full px-4 py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b]" %>
+        <div class="mb-4">
+          <%= form.label :present, "Will you attend?", class: "block text-gray-600 font-medium mb-1 sm:mb-2 text-sm sm:text-base" %>
+          <%= form.select :present, [["Yes", true], ["No", false]], {}, class: "w-full px-3 py-2 sm:px-4 sm:py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b] text-base sm:text-lg rounded" %>
           <% if @rsvp.errors[:present].any? %>
-            <div class="text-red-600 text-sm mt-1"><%= @rsvp.errors[:present].first %></div>
+            <div class="text-red-600 text-xs sm:text-sm mt-1"><%= @rsvp.errors[:present].first %></div>
           <% end %>
         </div>
-        <div class="text-center">
-          <%= form.submit "Submit RSVP", class: "bg-[#6e8a6b] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#50654e] transition duration-300 w-full sm:w-auto" %>
+        <div class="text-center mt-6">
+          <%= form.submit "Submit RSVP", class: "bg-[#6e8a6b] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#50654e] transition duration-300 w-full sm:w-auto text-base sm:text-lg shadow-md" %>
         </div>
       <% end %>
     </div>
