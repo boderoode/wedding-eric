@@ -52,4 +52,5 @@ Rails.application.configure do
   config.action_controller.raise_on_missing_callback_actions = true
 
   config.hosts << "hayley-and-erics-happiest-day.com"
+  config.hosts << "www.hayley-and-erics-happiest-day.com"
 end
