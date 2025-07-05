@@ -73,4 +73,6 @@ Rails.application.configure do
   # Ensure assets are served directly without precompilation
   config.assets.debug = true
   config.assets.compile = true
+
+  config.hosts << "hayley-and-erics-happiest-day.com"
 end
