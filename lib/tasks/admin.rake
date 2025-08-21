@@ -2,7 +2,7 @@ namespace :admin do
   desc "Create admin user for wedding management"
   task create_user: :environment do
     email = "bo_deroode@outlook.com"
-    password = "password123" # You should change this to something secure
+    password = "mobmuj-bogwah-daqXe1" # You should change this to something secure
 
     # Check if user already exists
     if User.find_by(email: email)
