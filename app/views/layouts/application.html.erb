@@ -30,7 +30,8 @@
   </head>
 
   <body>
-    
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     
     <% if current_page?(root_path) || current_page?(faq_index_path) || current_page?(hotels_path) || current_page?(gifts_path) %>
       <div class="w-full">

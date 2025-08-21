@@ -7,6 +7,9 @@
     <%= link_to 'Faqs', faq_index_path, class: 'mx-1 sm:mx-2 antic-didone-regular text-base sm:text-xl' %>
     <%= link_to 'Hotels', hotels_path, class: 'mx-1 sm:mx-2 antic-didone-regular text-base sm:text-xl' %>
     <%= link_to 'Gifts', gifts_path, class: 'mx-1 sm:mx-2 antic-didone-regular text-base sm:text-xl' %>
+    
+    <!-- Discrete admin link (small and in corner) -->
+    <%= link_to 'Admin', new_user_session_path, class: 'absolute top-0 right-2 text-xs text-white/60 hover:text-white/80 transition-colors' %>
   </div>
   <div class="absolute inset-0 flex flex-col items-center justify-center text-white w-full px-2 z-10">
     <p class="mb-1 pinyon-script-regular text-center text-base sm:text-xl">10.18.25</p>
