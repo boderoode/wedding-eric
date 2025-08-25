@@ -41,6 +41,7 @@ class Admin::RsvpsController < ApplicationController
 
   def create
     @rsvp = Rsvp.new(rsvp_params)
+    @rsvp.admin_created = true
 
     if @rsvp.save
       redirect_to admin_rsvps_path, notice: "RSVP was successfully created."
@@ -50,9 +51,11 @@ class Admin::RsvpsController < ApplicationController
   end
 
   def edit
+    # @rsvp is set by set_rsvp
   end
 
   def update
+    @rsvp.admin_created = true
     if @rsvp.update(rsvp_params)
       redirect_to admin_rsvps_path, notice: "RSVP was successfully updated."
     else

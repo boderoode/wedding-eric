@@ -16,7 +16,8 @@
       
       <div class="flex items-center space-x-4">
         <span class="text-white/80 text-sm pinyon-script-regular">Eric & Hayley • 10.18.25</span>
-        <%= link_to "Sign Out", destroy_user_session_path, method: :delete, 
+        <%= link_to "Sign Out", destroy_user_session_path, 
+            data: { "turbo-method": :delete },
             class: "bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors" %>
       </div>
     </div>
