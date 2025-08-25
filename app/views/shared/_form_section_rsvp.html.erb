@@ -57,10 +57,50 @@
         </div>
         <div class="mb-4">
           <%= form.label :present, "Will you attend?", class: "block text-gray-600 font-medium mb-1 sm:mb-2 text-sm sm:text-base" %>
-          <%= form.select :present, [["Yes", true], ["No", false]], {}, class: "w-full px-3 py-2 sm:px-4 sm:py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b] text-base sm:text-lg rounded" %>
+          <%= form.select :present, [["Yes", true], ["No", false]], {}, class: "w-full px-3 py-2 sm:px-4 sm:py-2 border-0 border-b-2 border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b] text-base sm:text-lg rounded", id: "attendance-select" %>
           <% if @rsvp.errors[:present].any? %>
             <div class="text-red-600 text-xs sm:text-sm mt-1"><%= @rsvp.errors[:present].first %></div>
           <% end %>
+        </div>
+
+        <!-- Plus Ones Section -->
+        <div id="guests-section" class="mb-4 hidden">
+          <div class="border-t border-gray-300 pt-4">
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="text-gray-600 font-medium text-sm sm:text-base">Plus Ones</h4>
+              <button type="button" id="add-guest-btn" class="bg-[#6e8a6b] text-white px-3 py-1 rounded text-xs sm:text-sm hover:bg-[#50654e] transition duration-300">
+                + Add Guest
+              </button>
+            </div>
+            <p class="text-gray-500 text-xs sm:text-sm mb-3">Please provide the names of any additional guests you're bringing.</p>
+            
+            <div id="guests-container">
+              <%= form.fields_for :guests do |guest_form| %>
+                <div class="guest-field-group border border-gray-300 rounded-lg p-3 mb-3 bg-gray-50">
+                  <div class="flex items-center justify-between mb-2">
+                    <h5 class="text-gray-600 font-medium text-xs sm:text-sm">Guest Information</h5>
+                    <button type="button" class="remove-guest-btn text-red-600 hover:text-red-800 text-xs">
+                      Remove
+                    </button>
+                  </div>
+                  <div class="flex flex-col sm:flex-row sm:space-x-3 space-y-2 sm:space-y-0">
+                    <div class="w-full sm:w-1/2">
+                      <%= guest_form.label :first_name, "First Name", class: "block text-gray-600 text-xs sm:text-sm mb-1" %>
+                      <%= guest_form.text_field :first_name, 
+                          class: "w-full px-2 py-1 sm:px-3 sm:py-2 border-0 border-b border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b] text-sm sm:text-base bg-transparent",
+                          placeholder: "First name" %>
+                    </div>
+                    <div class="w-full sm:w-1/2">
+                      <%= guest_form.label :last_name, "Last Name", class: "block text-gray-600 text-xs sm:text-sm mb-1" %>
+                      <%= guest_form.text_field :last_name, 
+                          class: "w-full px-2 py-1 sm:px-3 sm:py-2 border-0 border-b border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b] text-sm sm:text-base bg-transparent",
+                          placeholder: "Last name" %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
         </div>
         <div class="text-center mt-6">
           <%= form.submit "Submit RSVP", class: "bg-[#6e8a6b] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#50654e] transition duration-300 w-full sm:w-auto text-base sm:text-lg shadow-md" %>
@@ -69,4 +109,66 @@
     </div>
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const attendanceSelect = document.getElementById('attendance-select');
+  const guestsSection = document.getElementById('guests-section');
+  const addGuestBtn = document.getElementById('add-guest-btn');
+  const guestsContainer = document.getElementById('guests-container');
+  let guestIndex = 0;
+
+  // Show/hide guests section based on attendance
+  function toggleGuestsSection() {
+    if (attendanceSelect.value === 'true') {
+      guestsSection.classList.remove('hidden');
+    } else {
+      guestsSection.classList.add('hidden');
+    }
+  }
+
+  // Add event listener for attendance select
+  attendanceSelect.addEventListener('change', toggleGuestsSection);
+
+  // Add new guest field
+  addGuestBtn.addEventListener('click', function() {
+    const guestHtml = `
+      <div class="guest-field-group border border-gray-300 rounded-lg p-3 mb-3 bg-gray-50">
+        <div class="flex items-center justify-between mb-2">
+          <h5 class="text-gray-600 font-medium text-xs sm:text-sm">Guest Information</h5>
+          <button type="button" class="remove-guest-btn text-red-600 hover:text-red-800 text-xs">
+            Remove
+          </button>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:space-x-3 space-y-2 sm:space-y-0">
+          <div class="w-full sm:w-1/2">
+            <label class="block text-gray-600 text-xs sm:text-sm mb-1">First Name</label>
+            <input type="text" name="rsvp[guests_attributes][${guestIndex}][first_name]" 
+                   class="w-full px-2 py-1 sm:px-3 sm:py-2 border-0 border-b border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b] text-sm sm:text-base bg-transparent"
+                   placeholder="First name">
+          </div>
+          <div class="w-full sm:w-1/2">
+            <label class="block text-gray-600 text-xs sm:text-sm mb-1">Last Name</label>
+            <input type="text" name="rsvp[guests_attributes][${guestIndex}][last_name]" 
+                   class="w-full px-2 py-1 sm:px-3 sm:py-2 border-0 border-b border-[#6e8a6b] focus:outline-none focus:ring-0 focus:border-[#6e8a6b] text-sm sm:text-base bg-transparent"
+                   placeholder="Last name">
+          </div>
+        </div>
+      </div>
+    `;
+    guestsContainer.insertAdjacentHTML('beforeend', guestHtml);
+    guestIndex++;
+  });
+
+  // Remove guest field
+  guestsContainer.addEventListener('click', function(e) {
+    if (e.target.closest('.remove-guest-btn')) {
+      e.target.closest('.guest-field-group').remove();
+    }
+  });
+
+  // Initial state
+  toggleGuestsSection();
+});
+</script>
 

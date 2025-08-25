@@ -129,12 +129,56 @@
           <%= form.label :present, "Will you be attending?", class: "block text-sm font-medium text-gray-700 mb-3" %>
           <div class="space-y-3">
             <div class="flex items-center">
-              <%= form.radio_button :present, true, class: "h-4 w-4 text-[#3f4f3d] focus:ring-[#3f4f3d] border-gray-300" %>
+              <%= form.radio_button :present, true, class: "h-4 w-4 text-[#3f4f3d] focus:ring-[#3f4f3d] border-gray-300", id: "attending_yes" %>
               <%= form.label :present_true, "Yes, I'll be there!", class: "ml-3 text-sm font-medium text-gray-700" %>
             </div>
             <div class="flex items-center">
-              <%= form.radio_button :present, false, class: "h-4 w-4 text-[#3f4f3d] focus:ring-[#3f4f3d] border-gray-300" %>
+              <%= form.radio_button :present, false, class: "h-4 w-4 text-[#3f4f3d] focus:ring-[#3f4f3d] border-gray-300", id: "attending_no" %>
               <%= form.label :present_false, "Sorry, can't make it", class: "ml-3 text-sm font-medium text-gray-700" %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plus Ones Section -->
+        <div id="guests-section" class="hidden">
+          <div class="border-t border-gray-200 pt-6">
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="text-lg font-medium text-gray-900">Plus Ones</h4>
+              <button type="button" id="add-guest" class="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-[#3f4f3d] hover:bg-[#2d3a2b] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3f4f3d]">
+                <svg class="-ml-1 mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Add Guest
+              </button>
+            </div>
+            
+            <div id="guests-container">
+              <%= form.fields_for :guests do |guest_form| %>
+                <div class="guest-field-group border border-gray-200 rounded-lg p-4 mb-4">
+                  <div class="flex items-center justify-between mb-3">
+                    <h5 class="text-sm font-medium text-gray-700">Guest Details</h5>
+                    <button type="button" class="remove-guest text-red-600 hover:text-red-800 text-sm">
+                      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <%= guest_form.label :first_name, class: "block text-sm font-medium text-gray-700 mb-1" %>
+                      <%= guest_form.text_field :first_name, 
+                          class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3f4f3d] focus:border-transparent text-sm",
+                          placeholder: "First name" %>
+                    </div>
+                    <div>
+                      <%= guest_form.label :last_name, class: "block text-sm font-medium text-gray-700 mb-1" %>
+                      <%= guest_form.text_field :last_name, 
+                          class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3f4f3d] focus:border-transparent text-sm",
+                          placeholder: "Last name" %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
@@ -152,3 +196,69 @@
     </div>
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const attendingYes = document.getElementById('attending_yes');
+  const attendingNo = document.getElementById('attending_no');
+  const guestsSection = document.getElementById('guests-section');
+  const addGuestButton = document.getElementById('add-guest');
+  const guestsContainer = document.getElementById('guests-container');
+  let guestIndex = 0;
+
+  // Show/hide guests section based on attendance
+  function toggleGuestsSection() {
+    if (attendingYes.checked) {
+      guestsSection.classList.remove('hidden');
+    } else {
+      guestsSection.classList.add('hidden');
+    }
+  }
+
+  // Add event listeners for attendance radio buttons
+  attendingYes.addEventListener('change', toggleGuestsSection);
+  attendingNo.addEventListener('change', toggleGuestsSection);
+
+  // Add new guest field
+  addGuestButton.addEventListener('click', function() {
+    const guestHtml = `
+      <div class="guest-field-group border border-gray-200 rounded-lg p-4 mb-4">
+        <div class="flex items-center justify-between mb-3">
+          <h5 class="text-sm font-medium text-gray-700">Guest Details</h5>
+          <button type="button" class="remove-guest text-red-600 hover:text-red-800 text-sm">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">First name</label>
+            <input type="text" name="rsvp[guests_attributes][${guestIndex}][first_name]" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3f4f3d] focus:border-transparent text-sm"
+                   placeholder="First name">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Last name</label>
+            <input type="text" name="rsvp[guests_attributes][${guestIndex}][last_name]" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3f4f3d] focus:border-transparent text-sm"
+                   placeholder="Last name">
+          </div>
+        </div>
+      </div>
+    `;
+    guestsContainer.insertAdjacentHTML('beforeend', guestHtml);
+    guestIndex++;
+  });
+
+  // Remove guest field
+  guestsContainer.addEventListener('click', function(e) {
+    if (e.target.closest('.remove-guest')) {
+      e.target.closest('.guest-field-group').remove();
+    }
+  });
+
+  // Initial state
+  toggleGuestsSection();
+});
+</script>
