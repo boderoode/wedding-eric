@@ -156,23 +156,6 @@
           </div>
         </div>
 
-        <!-- Number of Guests -->
-        <div>
-          <%= form.label :guests, "Number of additional guests (not including yourself)", class: "block text-sm font-medium text-gray-700 mb-2" %>
-          <%= form.number_field :guests, 
-              min: 0, max: 5,
-              class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f4f3d] focus:border-transparent" %>
-          <p class="mt-1 text-sm text-gray-500">Enter 0 if just yourself, 1 if bringing a +1, etc.</p>
-        </div>
-
-        <!-- Dietary Restrictions -->
-        <div>
-          <%= form.label :dietary_restrictions, class: "block text-sm font-medium text-gray-700 mb-2" %>
-          <%= form.text_area :dietary_restrictions, rows: 3,
-              class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3f4f3d] focus:border-transparent",
-              placeholder: "Please let us know about any dietary restrictions, allergies, or special meal requirements..." %>
-        </div>
-
         <!-- Form Actions -->
         <div class="flex items-center justify-between pt-6 border-t border-gray-200">
           <div class="flex items-center space-x-3">

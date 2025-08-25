@@ -165,9 +165,6 @@
                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900"><%= rsvp.first_name %> <%= rsvp.last_name %></div>
-                      <% if rsvp.dietary_restrictions.present? %>
-                        <div class="text-sm text-gray-500">Dietary: <%= rsvp.dietary_restrictions.truncate(30) %></div>
-                      <% end %>
                     </div>
                   </div>
                 </td>
@@ -354,11 +351,6 @@
                   <div class="text-sm text-gray-500">
                     <%= rsvp.email %> | <%= rsvp.phone_number %> | Guests: <%= rsvp.guests %>
                   </div>
-                  <% if rsvp.dietary_restrictions.present? %>
-                    <div class="text-sm text-gray-500">
-                      Dietary: <%= rsvp.dietary_restrictions %>
-                    </div>
-                  <% end %>
                 </div>
               </div>
               <div class="flex items-center space-x-2">
