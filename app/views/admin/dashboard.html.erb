@@ -186,7 +186,7 @@
                   <% end %>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  <%= rsvp.present? ? rsvp.guests + 1 : 0 %>
+                  <%= rsvp.present? ? (rsvp.guests || 0) + 1 : 0 %>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="text-sm text-gray-900"><%= rsvp.email %></div>
@@ -349,7 +349,7 @@
                     <%= rsvp.first_name %> <%= rsvp.last_name %>
                   </div>
                   <div class="text-sm text-gray-500">
-                    <%= rsvp.email %> | <%= rsvp.phone_number %> | Guests: <%= rsvp.guests %>
+                    <%= rsvp.email %> | <%= rsvp.phone_number %> | Guests: <%= (rsvp.guests || 0) + 1 %>
                   </div>
                 </div>
               </div>

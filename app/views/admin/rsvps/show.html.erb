@@ -175,7 +175,7 @@
             <label class="block text-sm font-medium text-gray-500 mb-1">Number of Guests</label>
             <p class="text-gray-900">
               <% if @rsvp.present? %>
-                <%= @rsvp.guests + 1 %> total (<%= @rsvp.guests %> additional guest<%= @rsvp.guests == 1 ? '' : 's' %>)
+                <%= (@rsvp.guests || 0) + 1 %> total (<%= @rsvp.guests || 0 %> additional guest<%= (@rsvp.guests || 0) == 1 ? '' : 's' %>)
               <% else %>
                 0 (not attending)
               <% end %>

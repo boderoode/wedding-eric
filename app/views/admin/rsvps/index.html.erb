@@ -216,7 +216,7 @@
                 </td>
                 <td class="px-4 py-4 text-sm text-gray-900 text-center">
                   <% if invitee[:rsvp] && invitee[:status] == 'attending' %>
-                    <%= invitee[:rsvp].guests + 1 %>
+                    <%= (invitee[:rsvp].guests || 0) + 1 %>
                   <% elsif invitee[:status] == 'declined' %>
                     0
                   <% else %>
