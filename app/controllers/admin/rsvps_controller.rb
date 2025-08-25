@@ -25,7 +25,7 @@ class Admin::RsvpsController < ApplicationController
     @accepted_rsvps = @rsvps.where(present: true)
     @declined_rsvps = @rsvps.where(present: false)
     @pending_count = @invitees.count { |i| i[:status] == "pending" }
-    @total_guests = @accepted_rsvps.sum(:guests) + @accepted_rsvps.count
+    @total_attending = @accepted_rsvps.count
     @total_invitees = @invitees.count
   end
 
