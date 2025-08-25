@@ -145,53 +145,51 @@
       </div>
     </div>
 
-    <!-- RSVPs Table -->
-    <div class="bg-white shadow-lg rounded-xl border border-gray-200 overflow-hidden">
-      <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
-        <div class="flex items-center justify-between">
-          <h3 class="text-lg font-semibold text-gray-900">All Wedding RSVPs</h3>
-          <div class="flex items-center space-x-4">
-            <span class="text-sm text-gray-500"><%= @rsvps.count %> total responses</span>
-          </div>
-        </div>
-      </div>
-      
     <!-- Invitees Table -->
     <div class="bg-white shadow-lg rounded-xl border border-gray-200 overflow-hidden">
-      <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
-        <div class="flex items-center justify-between">
-          <h3 class="text-lg font-semibold text-gray-900">Wedding Guest List</h3>
-          <div class="flex items-center space-x-4">
-            <span class="text-sm text-gray-500"><%= @total_invitees %> invitees • <%= @rsvps.count %> responses</span>
+      <div class="px-4 sm:px-6 py-4 border-b border-gray-200 bg-gray-50">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2 sm:mb-0">Wedding Guest List</h3>
+          <div class="flex items-center space-x-4 text-sm text-gray-500">
+            <span><%= @total_invitees %> invitees</span>
+            <span class="hidden sm:inline">•</span>
+            <span><%= @rsvps.count %> responses</span>
           </div>
         </div>
       </div>
       
-      <div class="overflow-x-auto">
+      <div class="overflow-x-auto -mx-4 sm:mx-0">
+        <div class="inline-block min-w-full align-middle">
+          <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest Name</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Response Status</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guests</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Response Date</th>
-              <th scope="col" class="relative px-6 py-3"><span class="sr-only">Actions</span></th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4 min-w-[200px]">Guest Name</th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/6 min-w-[140px]">Response Status</th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12 min-w-[80px]">Guests</th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4 min-w-[180px]">Contact</th>
+              <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/6 min-w-[120px]">Response Date</th>
+              <th scope="col" class="relative px-4 py-3 w-1/6 min-w-[140px]"><span class="sr-only">Actions</span></th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
             <% @invitees.each do |invitee| %>
               <tr class="hover:bg-gray-50">
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="flex items-center">
+                <td class="px-4 py-4">
+                  <div class="flex items-center space-x-3">
                     <div class="flex-shrink-0 h-10 w-10">
                       <div class="h-10 w-10 rounded-full bg-[#3f4f3d] flex items-center justify-center">
                         <span class="text-sm font-medium text-white"><%= invitee[:first_name][0] %><%= invitee[:last_name][0] %></span>
                       </div>
                     </div>
+                    <div class="min-w-0 flex-1">
+                      <p class="text-sm font-medium text-gray-900 truncate">
+                        <%= invitee[:first_name] %> <%= invitee[:last_name] %>
+                      </p>
+                    </div>
                   </div>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap">
+                <td class="px-4 py-4">
                   <% case invitee[:status] %>
                   <% when 'attending' %>
                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -216,7 +214,7 @@
                     </span>
                   <% end %>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <td class="px-4 py-4 text-sm text-gray-900 text-center">
                   <% if invitee[:rsvp] && invitee[:status] == 'attending' %>
                     <%= invitee[:rsvp].guests + 1 %>
                   <% elsif invitee[:status] == 'declined' %>
@@ -225,23 +223,24 @@
                     <span class="text-gray-400">—</span>
                   <% end %>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap">
+                <td class="px-4 py-4">
                   <% if invitee[:rsvp] %>
-                    <div class="text-sm text-gray-900"><%= invitee[:rsvp].email %></div>
-                    <div class="text-sm text-gray-500"><%= invitee[:rsvp].phone_number %></div>
+                    <div class="text-sm text-gray-900 truncate"><%= invitee[:rsvp].email %></div>
+                    <div class="text-sm text-gray-500 truncate"><%= invitee[:rsvp].phone_number %></div>
                   <% else %>
                     <span class="text-gray-400 text-sm">No contact info</span>
                   <% end %>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td class="px-4 py-4 text-sm text-gray-500">
                   <% if invitee[:rsvp] %>
-                    <%= invitee[:rsvp].created_at.strftime("%b %d, %Y") %>
+                    <span class="block sm:hidden"><%= invitee[:rsvp].created_at.strftime("%m/%d/%y") %></span>
+                    <span class="hidden sm:block"><%= invitee[:rsvp].created_at.strftime("%b %d, %Y") %></span>
                   <% else %>
                     <span class="text-gray-400">—</span>
                   <% end %>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <div class="flex items-center justify-end space-x-2">
+                <td class="px-4 py-4 text-right text-sm font-medium">
+                  <div class="flex items-center justify-end space-x-1">
                     <% if invitee[:rsvp] %>
                       <!-- Has responded - show view/edit/delete -->
                       <%= link_to admin_rsvp_path(invitee[:rsvp]), class: "text-[#3f4f3d] hover:text-[#2d3a2b] p-1 rounded-md hover:bg-gray-100", title: "View Details" do %>
@@ -266,12 +265,13 @@
                     <% else %>
                       <!-- Has not responded - show add response button -->
                       <%= link_to new_admin_rsvp_path(first_name: invitee[:first_name], last_name: invitee[:last_name]), 
-                          class: "inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-[#3f4f3d] hover:bg-[#2d3a2b] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3f4f3d]", 
-                          title: "Add Response for #{invitee[:name]}" do %>
-                        <svg class="-ml-1 mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          class: "inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-[#3f4f3d] hover:bg-[#2d3a2b] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3f4f3d] transition-colors", 
+                          title: "Add Response for #{invitee[:first_name]} #{invitee[:last_name]}" do %>
+                        <svg class="-ml-0.5 mr-1 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                         </svg>
-                        Add Response
+                        <span class="hidden sm:inline">Add Response</span>
+                        <span class="sm:hidden">Add</span>
                       <% end %>
                     <% end %>
                   </div>
@@ -280,6 +280,8 @@
             <% end %>
           </tbody>
         </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
