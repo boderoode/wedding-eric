@@ -7,8 +7,8 @@ class RsvpsController < ApplicationController
 
   def create
     @rsvp = Rsvp.new(rsvp_params)
-    full_name = "#{@rsvp.first_name.to_s.strip} #{@rsvp.last_name.to_s.strip}".squeeze(" ").titleize
-    unless InviteeList.list.include?(full_name)
+    full_name = "#{@rsvp.first_name.to_s.strip} #{@rsvp.last_name.to_s.strip}".squeeze(" ")
+    unless InviteeList.list.any? { |invitee| invitee.downcase == full_name.downcase }
       @rsvp.errors.add(:base, "The name you entered is not on the invite list. Please check your spelling or contact the couple if you believe this is a mistake.")
       render :new, status: :unprocessable_entity
       return
