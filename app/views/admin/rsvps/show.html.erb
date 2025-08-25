@@ -126,11 +126,11 @@
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-500 mb-1">Email Address</label>
-            <p class="text-gray-900"><%= @rsvp.email %></p>
+            <p class="text-gray-900"><%= @rsvp.email.present? ? @rsvp.email : "Not provided" %></p>
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-500 mb-1">Phone Number</label>
-            <p class="text-gray-900"><%= @rsvp.phone_number %></p>
+            <p class="text-gray-900"><%= @rsvp.phone_number.present? ? @rsvp.phone_number : "Not provided" %></p>
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-500 mb-1">RSVP Date</label>
