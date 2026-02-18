@@ -1,3 +1,9 @@
-<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="256" cy="256" r="256" fill="red"/>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="256" cy="256" r="256" fill="#3f4f3d"/>
+  <!-- Left ring -->
+  <circle cx="216" cy="276" r="80" fill="none" stroke="#f7f6ed" stroke-width="16"/>
+  <!-- Right ring, interlocked -->
+  <circle cx="296" cy="276" r="80" fill="none" stroke="#f7f6ed" stroke-width="16"/>
+  <!-- Heart above rings -->
+  <path d="M256 200 C256 170, 220 150, 210 170 C200 190, 256 230, 256 230 C256 230, 312 190, 302 170 C292 150, 256 170, 256 200Z" fill="#f7f6ed"/>
 </svg>
